@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     /* flex-wrap: wrap-reverse; */
-    border: 2px solid blue;
+    border: 2px solid black;
     /* align-items: flex-end; */
     justify-content: space-between;
     width: 452px;
@@ -21,17 +21,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid red; */
+    border: 10px solid pink;
     flex: 1;
 }
 
 .calc-buttons {
     display: flex;
     flex-wrap: wrap-reverse;
-    /* flex: 1; */
+    flex: 1;
     border: 10px solid yellow;
     justify-content: space-between;
-    height: 300px;
+    /* height: 300px; */
 }
 
 .row {
@@ -43,6 +43,6 @@ body {
 
 button {
     flex: 1;
-    height: 100px;
+    height: 60px;
     width: 100px;
 }
