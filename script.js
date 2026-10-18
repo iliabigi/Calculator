@@ -17,3 +17,7 @@ function divide(expression) {
     const elements = expression.split(" ");
     return +elements[0] / +elements[2];
 }
+
+function operate() {
+
+}
