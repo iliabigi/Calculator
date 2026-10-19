@@ -3,16 +3,29 @@ for (let ref of buttons) {
     ref.addEventListener("click", e => {
         // console.log(Number(e.target.textContent))
         if (!Number.isNaN(Number(e.target.textContent))) {
-            (variables.num1 === undefined) ? variables.num1 = Number(e.target.textContent)
-                                           : (variables.num2 === undefined) ? 
-                                           variables.num2 = Number(e.target.textContent)
-                                           : operate(variables.num1, variables.num2);
+            if (variables.num1 === undefined) {
+                variables.num1 = Number(e.target.textContent);
+                display(variables.num1);
+
+            } else if (variables.num2 === undefined) {
+                variables.num2 = Number(e.target.textContent);
+                display(variables.num2);
+
+            } else {
+                operate(variables.num1, variables.num2);
+            }
         } else if (typeof e.target.textContent === "string") {
             variables.operator = e.target.textContent;
         }
         console.log(variables);
     })
 }
+
+function display(num) {
+    const calcDisplay = document.querySelector("#display");
+    calcDisplay.textContent = num;
+}
+
 
 // console.log(Number("+"))
 // console.log(typeof ("2"));

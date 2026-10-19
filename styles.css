@@ -6,6 +6,14 @@ body {
     align-items: center;
 }
 
+p {
+    display: flex;
+    color: red;
+    border: 2px solid green;
+    flex: 1;
+    justify-content: center;
+}
+
 .calc-body {
     display: flex;
     flex-direction: column;
@@ -15,7 +23,9 @@ body {
     justify-content: space-between;
     width: 452px;
     height: 500px;
+
 }
+
 
 .calc-display {
     display: flex;
