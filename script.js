@@ -1,6 +1,4 @@
-let result = 0
-
-const variables = {
+const calcVariables = {
     num1: undefined,
     num2: undefined,
     operator: undefined,
@@ -11,48 +9,50 @@ const operators = ["-", "+", "/", "*"];
 
 const buttons = [...document.querySelectorAll("button")];
 
+let result = 0
 
 
 for (let ref of buttons) {
 
     ref.addEventListener("click", e => {
         if (!Number.isNaN(Number(e.target.textContent))) {
-            if (!variables.hasOperator) {
+            if (!calcVariables.hasOperator) {
                 result = (result * 10) + Number(e.target.textContent);
-                variables.num1 = result;
+                calcVariables.num1 = result;
                 display(result);
             } else {
                 result = (result * 10) + Number(e.target.textContent);
-                variables.num2 = result;
+                calcVariables.num2 = result;
                 display(result);
             }
         } else if (operators.includes(e.target.textContent)) {
             result = 0;
-            variables.hasOperator = true;
-            console.log("HIIII")
-            variables.operator = e.target.textContent;
+            calcVariables.hasOperator = true;
+            calcVariables.operator = e.target.textContent;
         } else if (e.target.textContent === "Clear") {
-            variables.num1 = undefined;
-            variables.num2 = undefined;
-            variables.operator = undefined;
+            calcVariables.num1 = undefined;
+            calcVariables.num2 = undefined;
+            calcVariables.operator = undefined;
+            calcVariables.hasOperator = false;
+
+            result = 0;
+            display(0);
         } else if (e.target.textContent === "=") {
-            let equals = operate(variables.num1, variables.num2, variables.operator);
-            variables.num1 = equals;
-            variables.num2 = undefined;
+            let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
+            calcVariables.num1 = equals;
+            calcVariables.num2 = undefined;
+
+            result = 0;
             display(equals);
         }
-        console.log(variables);
+        console.log(calcVariables);
     })
-
 }
 
 function display(num) {
     const calcDisplay = document.querySelector("#display");
     calcDisplay.textContent = num;
 }
-
-
-
 
 function add(expression) {
     const elements = expression.split(" ");
@@ -84,5 +84,4 @@ function operate(number1, number2, operator) {
     } else {
         return number1 / number2;
     }
-
 }
