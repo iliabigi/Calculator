@@ -1,23 +1,34 @@
+let result = 0
+
+const variables = {
+    num1: undefined,
+    num2: undefined,
+    operator: undefined,
+    hasOperator: false
+};
+
+const operators = ["-", "+", "/", "*"];
+
 const buttons = [...document.querySelectorAll("button")];
+
+
+
 for (let ref of buttons) {
+
     ref.addEventListener("click", e => {
-        // console.log(Number(e.target.textContent))
         if (!Number.isNaN(Number(e.target.textContent))) {
-            if (variables.num1 === undefined) {
-                variables.num1 = Number(e.target.textContent);
-                display(variables.num1);
-
-            } else if (variables.num2 === undefined) {
-                variables.num2 = Number(e.target.textContent);
-                display(variables.num2);
-
+            if (!variables.hasOperator) {
+                result = (result * 10) + Number(e.target.textContent);
+                variables.num1 = result;
+                display(result);
             } else {
-                console.log("test")
-                console.log("test2")
-                variables.num1 = operate(variables.num1, variables.num2, variables.operator);
-                variables.num2 = Number(e.target.textContent);
+                result = (result * 10) + Number(e.target.textContent);
+                variables.num2 = result;
+                display(result);
             }
         } else if (operators.includes(e.target.textContent)) {
+            result = 0;
+            variables.hasOperator = true;
             console.log("HIIII")
             variables.operator = e.target.textContent;
         } else if (e.target.textContent === "Clear") {
@@ -25,10 +36,14 @@ for (let ref of buttons) {
             variables.num2 = undefined;
             variables.operator = undefined;
         } else if (e.target.textContent === "=") {
-            display(operate(variables.num1, variables.num2, variables.operator));
+            let equals = operate(variables.num1, variables.num2, variables.operator);
+            variables.num1 = equals;
+            variables.num2 = undefined;
+            display(equals);
         }
         console.log(variables);
     })
+
 }
 
 function display(num) {
@@ -37,16 +52,7 @@ function display(num) {
 }
 
 
-// console.log(Number("+"))
-// console.log(typeof ("2"));
 
-const variables = {
-    num1: undefined,
-    num2: undefined,
-    operator: undefined
-};
-
-const operators = ["-", "+", "/", "*"];
 
 function add(expression) {
     const elements = expression.split(" ");

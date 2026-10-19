@@ -13,9 +13,7 @@ p {
     flex: 1;
     margin: 0;
     color: red;
-    /* border: 2px solid green; */
     
-
     justify-content: center;
     align-items: center;
 }
@@ -23,20 +21,14 @@ p {
 .calc-body {
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap-reverse; */
-    border: 2px solid black;
-    /* align-items: flex-end; */
     justify-content: space-between;
     width: 452px;
     height: 500px;
-
+    border: 2px solid black;
 }
-
 
 .calc-display {
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
     border: 10px solid pink;
     flex: 1;
 }
@@ -45,16 +37,13 @@ p {
     display: flex;
     flex-wrap: wrap-reverse;
     flex: 1;
-    border: 10px solid yellow;
     justify-content: space-between;
-    /* height: 300px; */
+    border: 10px solid yellow;
 }
 
 .row {
-    /* border: 2px solid red; */
     display: flex;
     flex: 1;
-    /* flex-direction: column; */
 }
 
 button {
