@@ -12,10 +12,20 @@ for (let ref of buttons) {
                 display(variables.num2);
 
             } else {
-                operate(variables.num1, variables.num2);
+                console.log("test")
+                console.log("test2")
+                variables.num1 = operate(variables.num1, variables.num2, variables.operator);
+                variables.num2 = Number(e.target.textContent);
             }
-        } else if (typeof e.target.textContent === "string") {
+        } else if (operators.includes(e.target.textContent)) {
+            console.log("HIIII")
             variables.operator = e.target.textContent;
+        } else if (e.target.textContent === "Clear") {
+            variables.num1 = undefined;
+            variables.num2 = undefined;
+            variables.operator = undefined;
+        } else if (e.target.textContent === "=") {
+            display(operate(variables.num1, variables.num2, variables.operator));
         }
         console.log(variables);
     })
@@ -58,6 +68,15 @@ function divide(expression) {
     return +elements[0] / +elements[2];
 }
 
-function operate() {
+function operate(number1, number2, operator) {
+    if (operator === "+") {
+        return number1 + number2;
+    } else if (operator === "-") {
+        return number1 - number2;
+    } else if (operator === "*") {
+        return number1 * number2;
+    } else {
+        return number1 / number2;
+    }
 
 }

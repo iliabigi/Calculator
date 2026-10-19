@@ -4,14 +4,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 p {
     display: flex;
-    color: red;
-    border: 2px solid green;
     flex: 1;
+    margin: 0;
+    color: red;
+    /* border: 2px solid green; */
+    
+
     justify-content: center;
+    align-items: center;
 }
 
 .calc-body {
@@ -29,8 +35,8 @@ p {
 
 .calc-display {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     border: 10px solid pink;
     flex: 1;
 }
