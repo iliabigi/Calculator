@@ -43,14 +43,23 @@ for (let ref of buttons) {
                 }
             } else if (operators.includes(e.target.textContent)) {
                 if (calcVariables.num2 !== undefined && calcVariables.hasOperator === true) {
-                    calcVariables.num1 = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
-                    display(calcVariables.num1);
+                    let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
+                    if (equals === "undefined detected") undefinedHandler();
+                    //In case user divides by 0
+                    else if (equals === Infinity) {
+                        display("oi mate you can't do that... I'll ignore just this once");
+                        setTimeout(display, 1000, calcVariables.num1);
+                        calcVariables.num2 = undefined;
+                        // calcVariables.hasOperator = false
+                        result = 0;
+                    } else {
+                        calcVariables.num1 = equals;
+                        display(calcVariables.num1);
+                    }
                 }
-
                 calcVariables.hasOperator = true;
                 calcVariables.operator = e.target.textContent;
                 result = 0;
-                
             } else if (e.target.textContent === "AC") {
                 calcVariables.num1 = undefined;
                 calcVariables.num2 = undefined;
@@ -64,13 +73,27 @@ for (let ref of buttons) {
                 display("Enter your number:");
                 result = 0;
             } else if (e.target.textContent === "=") {
+                //if any of the numbers are undefined
+                //the calculator will reset it self
                 let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
-                calcVariables.num1 = equals;
-                calcVariables.hasOperator = false
+                if (equals === "undefined detected") undefinedHandler();
 
-                display(equals);
-                result = 0;
+                //in case user divides by 0
+                else if (equals === Infinity) {
+                    display("oi mate you can't do that... I'll ignore just this once");
+                    setTimeout(display, 1000, calcVariables.num1);
+                    calcVariables.num2 = undefined;
+                    calcVariables.hasOperator = false
+                    result = 0;
+                } else {
+                    calcVariables.num1 = equals;
+                    calcVariables.hasOperator = false
+
+                    display(equals);
+                    result = 0;
+                }
             }
+                
 
             console.log(calcVariables);
         }
@@ -85,27 +108,23 @@ function display(num) {
     calcDisplay.textContent = num;
 }
 
-function add(expression) {
-    const elements = expression.split(" ");
-    return +elements[0] + +elements[2];
-}
+function undefinedHandler() {
+    calcVariables.num1 = undefined;
+    calcVariables.num2 = undefined;
+    calcVariables.hasOperator = false
+    result = 0;
 
-function subtract(expression) {
-    const elements = expression.split(" ");
-    return +elements[0] - +elements[2];
-}
-
-function multiply(expression) {
-    const elements = expression.split(" ");
-    return +elements[0] * +elements[2];
-}
-
-function divide(expression) {
-    const elements = expression.split(" ");
-    return +elements[0] / +elements[2];
-}
+    display("cmon man you can't do operations on undefined stuff!");
+    setTimeout(display, 1000, "cleaning my data.");
+    setTimeout(display, 3000, "");
+} 
 
 function operate(number1, number2, operator) {
+    if (number1 === undefined || number2 === undefined) {
+        return "undefined detected"
+        // return "cmon man you can't do operations on undefined stuff! cleaning my data."
+    }
+
     if (operator === "+") {
         return number1 + number2;
     } else if (operator === "-") {
