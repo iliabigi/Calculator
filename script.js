@@ -44,13 +44,13 @@ for (let ref of buttons) {
             } else if (operators.includes(e.target.textContent)) {
                 if (calcVariables.num2 !== undefined && calcVariables.hasOperator === true) {
                     let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
+                    //In case there's an undefined in the numbers
                     if (equals === "undefined detected") undefinedHandler();
                     //In case user divides by 0
                     else if (equals === Infinity) {
                         display("oi mate you can't do that... I'll ignore just this once");
                         setTimeout(display, 1000, calcVariables.num1);
                         calcVariables.num2 = undefined;
-                        // calcVariables.hasOperator = false
                         result = 0;
                     } else {
                         calcVariables.num1 = equals;
@@ -73,12 +73,10 @@ for (let ref of buttons) {
                 display("Enter your number:");
                 result = 0;
             } else if (e.target.textContent === "=") {
-                //if any of the numbers are undefined
-                //the calculator will reset it self
                 let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
+                //In case there's an undefined in the equation
                 if (equals === "undefined detected") undefinedHandler();
-
-                //in case user divides by 0
+                //In case user divides by 0
                 else if (equals === Infinity) {
                     display("oi mate you can't do that... I'll ignore just this once");
                     setTimeout(display, 1000, calcVariables.num1);
@@ -94,7 +92,6 @@ for (let ref of buttons) {
                 }
             }
                 
-
             console.log(calcVariables);
         }
 
@@ -108,6 +105,8 @@ function display(num) {
     calcDisplay.textContent = num;
 }
 
+//If any of the numbers are undefined
+//The calculator will reset it self
 function undefinedHandler() {
     calcVariables.num1 = undefined;
     calcVariables.num2 = undefined;
@@ -121,8 +120,7 @@ function undefinedHandler() {
 
 function operate(number1, number2, operator) {
     if (number1 === undefined || number2 === undefined) {
-        return "undefined detected"
-        // return "cmon man you can't do operations on undefined stuff! cleaning my data."
+        return "undefined detected";
     }
 
     if (operator === "+") {
