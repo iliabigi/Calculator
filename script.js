@@ -1,7 +1,3 @@
-//ac button c button as backspace
-//start and finish buttons
-
-
 const calcVariables = {
     num1: undefined,
     num2: undefined,
@@ -23,21 +19,18 @@ for (let ref of buttons) {
 
     ref.addEventListener("click", e => {
 
-        console.log(SWITCH);
-
         if (e.target.textContent === "wake up") {
             SWITCH = true;
             display("hello... what can I do for ya?")
         }
 
         if (e.target.textContent === "bye") {
+            SWITCH = false;
             display("alrighty I'm going to bed now :>");
             setTimeout(display, 5000, "");
-            SWITCH = false;
         }
 
         if (SWITCH) {
-
             if (!Number.isNaN(Number(e.target.textContent))) {
                 if (!calcVariables.hasOperator) {
                     result = (result * 10) + Number(e.target.textContent);
@@ -49,15 +42,14 @@ for (let ref of buttons) {
                     display(result);
                 }
             } else if (operators.includes(e.target.textContent)) {
-
                 if (calcVariables.num2 !== undefined && calcVariables.hasOperator === true) {
                     calcVariables.num1 = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
                     display(calcVariables.num1);
                 }
 
-                result = 0;
                 calcVariables.hasOperator = true;
                 calcVariables.operator = e.target.textContent;
+                result = 0;
                 
             } else if (e.target.textContent === "AC") {
                 calcVariables.num1 = undefined;
@@ -66,32 +58,30 @@ for (let ref of buttons) {
                 calcVariables.hasOperator = false;
 
                 result = 0;
-                display(0);
+                display("Cleaning everything.");
             } else if (e.target.textContent === "C") {
                 (calcVariables.num2 === undefined) ? calcVariables.num1 = undefined : calcVariables.num2 = undefined;
-                result = 0;
                 display("Enter your number:");
-            }
-            else if (e.target.textContent === "=") {
+                result = 0;
+            } else if (e.target.textContent === "=") {
                 let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
                 calcVariables.num1 = equals;
                 calcVariables.hasOperator = false
 
-                result = 0;
                 display(equals);
+                result = 0;
             }
-            console.log(calcVariables);
 
+            console.log(calcVariables);
         }
 
         if (!SWITCH && calcDisplay.textContent === "") {
-            display("the calculator is sleeping... try waking it up? ")
+            display("the calculator is sleeping... maybe try waking it up? ")
         }
     })
 }
 
 function display(num) {
-    // const calcDisplay = document.querySelector("#display");
     calcDisplay.textContent = num;
 }
 
