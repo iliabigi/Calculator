@@ -1,3 +1,7 @@
+//ac button c button as backspace
+//start and finish buttons
+
+
 const calcVariables = {
     num1: undefined,
     num2: undefined,
@@ -9,6 +13,7 @@ const operators = ["-", "+", "/", "*"];
 
 const buttons = [...document.querySelectorAll("button")];
 
+let SWITCH = false
 let result = 0
 
 
@@ -29,7 +34,11 @@ for (let ref of buttons) {
             result = 0;
             calcVariables.hasOperator = true;
             calcVariables.operator = e.target.textContent;
-        } else if (e.target.textContent === "Clear") {
+            if (calcVariables.num2 !== undefined) {
+                calcVariables.num1 = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
+                display(calcVariables.num1);
+            }
+        } else if (e.target.textContent === "AC") {
             calcVariables.num1 = undefined;
             calcVariables.num2 = undefined;
             calcVariables.operator = undefined;
@@ -37,10 +46,15 @@ for (let ref of buttons) {
 
             result = 0;
             display(0);
-        } else if (e.target.textContent === "=") {
+        } else if (e.target.textContent === "C") {
+            (calcVariables.num2 === undefined) ? calcVariables.num1 = undefined : calcVariables.num2 = undefined;
+            result = 0;
+            display("Enter your number:");
+        }
+        else if (e.target.textContent === "=") {
             let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
             calcVariables.num1 = equals;
-            calcVariables.num2 = undefined;
+            // calcVariables.num2 = undefined;
 
             result = 0;
             display(equals);
