@@ -14,26 +14,39 @@ const num1Display = document.querySelector("#num1");
 const operatorDisplay = document.querySelector("#operator");
 const num2Display = document.querySelector("#num2");
 const displayText = num1Display.textContent;
+const screen = document.querySelector("body");
 
-let SWITCH = false
+let SWITCH = false;
 let decimalPoint = false;
 let decimalPower = 1;
 let result = 0
 console.log(SWITCH)
 
+
+screen.addEventListener("keydown", e => {
+    console.log(e.key);
+    const findButton = buttons.find(val => val.dataset.key === e.key);
+    findButton.focus();
+    findButton.click();
+})
+
+
 for (let ref of buttons) {
 
     ref.addEventListener("click", e => {
-
         if (e.target.textContent === "wake up") {
             result = 0;
             SWITCH = true;
             display("hello... what can I do for ya?")
+            console.log("TEST1")
+
         }
 
         if (e.target.textContent === "bye") {
             result = 0;
             SWITCH = false;
+             console.log("TEST2")
+
             num1Display.textContent = displayText;
             num2Display.textContent = displayText;
             operatorDisplay.textContent = displayText;
@@ -43,7 +56,8 @@ for (let ref of buttons) {
 
         if (e.target.textContent === ".") {
             decimalPoint = true;
-            console.log(decimalPoint);
+            console.log("TEST3")
+            // console.log(decimalPoint);
         }
 
         if (SWITCH) {
