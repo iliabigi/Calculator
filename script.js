@@ -10,6 +10,10 @@ const operators = ["-", "+", "/", "*"];
 const buttons = [...document.querySelectorAll("button")];
 
 const calcDisplay = document.querySelector("#display");
+const num1Display = document.querySelector("#num1");
+const operatorDisplay = document.querySelector("#operator");
+const num2Display = document.querySelector("#num2");
+const displayText = num1Display.textContent;
 
 let SWITCH = false
 let result = 0
@@ -20,12 +24,17 @@ for (let ref of buttons) {
     ref.addEventListener("click", e => {
 
         if (e.target.textContent === "wake up") {
+            result = 0;
             SWITCH = true;
             display("hello... what can I do for ya?")
         }
 
         if (e.target.textContent === "bye") {
+            result = 0;
             SWITCH = false;
+            num1Display.textContent = displayText;
+            num2Display.textContent = displayText;
+            operatorDisplay.textContent = displayText;
             display("alrighty I'm going to bed now :>");
             setTimeout(display, 5000, "");
         }
@@ -35,50 +44,70 @@ for (let ref of buttons) {
                 if (!calcVariables.hasOperator) {
                     result = (result * 10) + Number(e.target.textContent);
                     calcVariables.num1 = result;
+                    // num1Display.textContent = calcVariables.num1;
                     display(result);
                 } else {
                     result = (result * 10) + Number(e.target.textContent);
                     calcVariables.num2 = result;
+                    // num2Display.textContent = calcVariables.num2;
                     display(result);
                 }
+
             } else if (operators.includes(e.target.textContent)) {
+                calcVariables.operator = e.target.textContent;
+                num1Display.textContent = calcVariables.num1;
+                operatorDisplay.textContent = calcVariables.operator
+
                 if (calcVariables.num2 !== undefined && calcVariables.hasOperator === true) {
                     let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
                     //In case there's an undefined in the numbers
                     if (equals === "undefined detected") undefinedHandler();
                     //In case user divides by 0
                     else if (equals === Infinity) {
-                        display("oi mate you can't do that... I'll ignore just this once");
+                        display("oi mate you can't do that... I'll ignore it just this once");
                         setTimeout(display, 1000, calcVariables.num1);
                         calcVariables.num2 = undefined;
                         result = 0;
                     } else {
                         calcVariables.num1 = equals;
+                        num2Display.textContent = calcVariables.num2;
+                        // num1Display.textContent = calcVariables.num1;
                         display(calcVariables.num1);
                     }
-                }
+                }  
+
                 calcVariables.hasOperator = true;
-                calcVariables.operator = e.target.textContent;
                 result = 0;
+
             } else if (e.target.textContent === "AC") {
                 calcVariables.num1 = undefined;
                 calcVariables.num2 = undefined;
                 calcVariables.operator = undefined;
                 calcVariables.hasOperator = false;
 
+                num1Display.textContent = displayText;
+                num2Display.textContent = displayText;
+                operatorDisplay.textContent = displayText;
+
                 result = 0;
                 display("Cleaning everything.");
+
             } else if (e.target.textContent === "C") {
                 (calcVariables.num2 === undefined) ? calcVariables.num1 = undefined : calcVariables.num2 = undefined;
+                (calcVariables.num1 === undefined) ? num1Display.textContent = displayText : num2Display.textContent = displayText;
+
                 display("Enter your number:");
                 result = 0;
+
             } else if (e.target.textContent === "=") {
+                num1Display.textContent = calcVariables.num1;
+                num2Display.textContent = calcVariables.num2;
                 let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
                 //In case there's an undefined in the equation
                 if (equals === "undefined detected") undefinedHandler();
                 //In case user divides by 0
                 else if (equals === Infinity) {
-                    display("oi mate you can't do that... I'll ignore just this once");
+                    display("oi mate you can't do that... I'll ignore it just this once");
                     setTimeout(display, 1000, calcVariables.num1);
                     calcVariables.num2 = undefined;
                     calcVariables.hasOperator = false
@@ -87,11 +116,12 @@ for (let ref of buttons) {
                     calcVariables.num1 = equals;
                     calcVariables.hasOperator = false
 
+
                     display(equals);
                     result = 0;
                 }
             }
-                
+    
             console.log(calcVariables);
         }
 
