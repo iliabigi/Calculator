@@ -16,6 +16,8 @@ const num2Display = document.querySelector("#num2");
 const displayText = num1Display.textContent;
 
 let SWITCH = false
+let decimalPoint = false;
+let decimalPower = 1;
 let result = 0
 console.log(SWITCH)
 
@@ -39,21 +41,44 @@ for (let ref of buttons) {
             setTimeout(display, 5000, "");
         }
 
+        if (e.target.textContent === ".") {
+            decimalPoint = true;
+            console.log(decimalPoint);
+        }
+
         if (SWITCH) {
             if (!Number.isNaN(Number(e.target.textContent))) {
                 if (!calcVariables.hasOperator) {
-                    result = (result * 10) + Number(e.target.textContent);
-                    calcVariables.num1 = result;
-                    // num1Display.textContent = calcVariables.num1;
-                    display(result);
+                    if (!decimalPoint) {
+                        result = (result * 10) + Number(e.target.textContent);
+                        calcVariables.num1 = result;
+                        // num1Display.textContent = calcVariables.num1;
+                        display(result);
+                    } else {
+                        result = ((result * (10 ** decimalPower)) + Number(e.target.textContent)) / (10 ** decimalPower);
+                        calcVariables.num1 = result;
+                        decimalPower++;
+                        display(result);
+                        
+                    }
                 } else {
-                    result = (result * 10) + Number(e.target.textContent);
-                    calcVariables.num2 = result;
-                    // num2Display.textContent = calcVariables.num2;
-                    display(result);
+                    if (!decimalPoint) {
+                        result = (result * 10) + Number(e.target.textContent);
+                        calcVariables.num2 = result;
+                        // num2Display.textContent = calcVariables.num2;
+                        display(result);
+                    } else {
+                        result = ((result * (10 ** decimalPower)) + Number(e.target.textContent)) / (10 ** decimalPower);
+                        calcVariables.num2 = result;
+                        decimalPower++;
+                        display(result);
+                    }
+                    
                 }
 
             } else if (operators.includes(e.target.textContent)) {
+                decimalPoint = false;
+                decimalPower = 1;
                 calcVariables.operator = e.target.textContent;
                 num1Display.textContent = calcVariables.num1;
                 operatorDisplay.textContent = calcVariables.operator
@@ -89,10 +114,14 @@ for (let ref of buttons) {
                 num2Display.textContent = displayText;
                 operatorDisplay.textContent = displayText;
 
+                decimalPoint = false;
+                decimalPower = 1;
                 result = 0;
                 display("Cleaning everything.");
 
             } else if (e.target.textContent === "C") {
+                decimalPoint = false;
+                decimalPower = 1;
                 (calcVariables.num2 === undefined) ? calcVariables.num1 = undefined : calcVariables.num2 = undefined;
                 (calcVariables.num1 === undefined) ? num1Display.textContent = displayText : num2Display.textContent = displayText;
 
@@ -100,6 +129,8 @@ for (let ref of buttons) {
                 result = 0;
 
             } else if (e.target.textContent === "=") {
+                decimalPoint = false;
+                decimalPower = 1;
                 num1Display.textContent = calcVariables.num1;
                 num2Display.textContent = calcVariables.num2;
                 let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
@@ -140,7 +171,12 @@ function display(num) {
 function undefinedHandler() {
     calcVariables.num1 = undefined;
     calcVariables.num2 = undefined;
-    calcVariables.hasOperator = false
+    calcVariables.hasOperator = false;
+
+    num1Display.textContent = displayText;
+    num2Display.textContent = displayText;
+    operatorDisplay.textContent = displayText;
+
     result = 0;
 
     display("cmon man you can't do operations on undefined stuff!");
