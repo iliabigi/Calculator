@@ -26,6 +26,11 @@ console.log(SWITCH)
 screen.addEventListener("keydown", e => {
     console.log(e.key);
     const findButton = buttons.find(val => val.dataset.key === e.key);
+
+    if (e.key === "Enter") {
+        e.preventDefault();
+    }
+
     findButton.focus();
     findButton.click();
 })
