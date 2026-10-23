@@ -43,14 +43,11 @@ for (let ref of buttons) {
             result = 0;
             SWITCH = true;
             display("hello... what can I do for ya?")
-            console.log("TEST1")
-
         }
 
         if (e.target.textContent === "bye") {
             result = 0;
             SWITCH = false;
-             console.log("TEST2")
 
             num1Display.textContent = displayText;
             num2Display.textContent = displayText;
@@ -61,8 +58,6 @@ for (let ref of buttons) {
 
         if (e.target.textContent === ".") {
             decimalPoint = true;
-            console.log("TEST3")
-            // console.log(decimalPoint);
         }
 
         if (SWITCH) {
@@ -71,20 +66,17 @@ for (let ref of buttons) {
                     if (!decimalPoint) {
                         result = (result * 10) + Number(e.target.textContent);
                         calcVariables.num1 = result;
-                        // num1Display.textContent = calcVariables.num1;
                         display(result);
                     } else {
                         result = ((result * (10 ** decimalPower)) + Number(e.target.textContent)) / (10 ** decimalPower);
                         calcVariables.num1 = result;
                         decimalPower++;
                         display(result);
-                        
                     }
                 } else {
                     if (!decimalPoint) {
                         result = (result * 10) + Number(e.target.textContent);
                         calcVariables.num2 = result;
-                        // num2Display.textContent = calcVariables.num2;
                         display(result);
                     } else {
                         result = ((result * (10 ** decimalPower)) + Number(e.target.textContent)) / (10 ** decimalPower);
@@ -115,7 +107,6 @@ for (let ref of buttons) {
                     } else {
                         calcVariables.num1 = equals;
                         num2Display.textContent = calcVariables.num2;
-                        // num1Display.textContent = calcVariables.num1;
                         display(calcVariables.num1);
                     }
                 }  
@@ -172,7 +163,7 @@ for (let ref of buttons) {
                 }
             }
     
-            console.log(calcVariables);
+            // console.log(calcVariables);
         }
 
         if (!SWITCH && calcDisplay.textContent === "") {
