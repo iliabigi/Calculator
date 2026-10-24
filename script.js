@@ -10,6 +10,7 @@ const operators = ["-", "+", "/", "*"];
 const buttons = [...document.querySelectorAll("button")];
 
 const calcDisplay = document.querySelector("#display");
+const calcMessageDisplay = document.querySelector("#displayText")
 const num1Display = document.querySelector("#num1");
 const operatorDisplay = document.querySelector("#operator");
 const num2Display = document.querySelector("#num2");
@@ -42,7 +43,7 @@ for (let ref of buttons) {
         if (e.target.textContent === "wake up") {
             result = 0;
             SWITCH = true;
-            display("hello... what can I do for ya?")
+            displayMessage("hello... what can I do for ya?")
         }
 
         if (e.target.textContent === "bye") {
@@ -52,8 +53,8 @@ for (let ref of buttons) {
             num1Display.textContent = displayText;
             num2Display.textContent = displayText;
             operatorDisplay.textContent = displayText;
-            display("alrighty I'm going to bed now :>");
-            setTimeout(display, 5000, "");
+            displayMessage("alrighty I'm going to bed now :>");
+            setTimeout(displayMessage, 5000, "");
         }
 
         if (e.target.textContent === ".") {
@@ -100,8 +101,8 @@ for (let ref of buttons) {
                     if (equals === "undefined detected") undefinedHandler();
                     //In case user divides by 0
                     else if (equals === Infinity) {
-                        display("oi mate you can't do that... I'll ignore it just this once");
-                        setTimeout(display, 1000, calcVariables.num1);
+                        displayMessage("oi mate you can't do that... I'll ignore it just this once");
+                        setTimeout(displayMessage, 1000, calcVariables.num1);
                         calcVariables.num2 = undefined;
                         result = 0;
                     } else {
@@ -127,7 +128,7 @@ for (let ref of buttons) {
                 decimalPoint = false;
                 decimalPower = 1;
                 result = 0;
-                display("Cleaning everything.");
+                displayMessage("Cleaning everything.");
 
             } else if (e.target.textContent === "C") {
                 decimalPoint = false;
@@ -135,7 +136,7 @@ for (let ref of buttons) {
                 (calcVariables.num2 === undefined) ? calcVariables.num1 = undefined : calcVariables.num2 = undefined;
                 (calcVariables.num1 === undefined) ? num1Display.textContent = displayText : num2Display.textContent = displayText;
 
-                display("Enter your number:");
+                displayMessage("Enter your number:");
                 result = 0;
 
             } else if (e.target.textContent === "=") {
@@ -148,8 +149,8 @@ for (let ref of buttons) {
                 if (equals === "undefined detected") undefinedHandler();
                 //In case user divides by 0
                 else if (equals === Infinity) {
-                    display("oi mate you can't do that... I'll ignore it just this once");
-                    setTimeout(display, 1000, calcVariables.num1);
+                    displayMessage("oi mate you can't do that... I'll ignore it just this once");
+                    setTimeout(displayMessage, 1000, calcVariables.num1);
                     calcVariables.num2 = undefined;
                     calcVariables.hasOperator = false
                     operatorDisplay.textContent = displayText;
@@ -168,15 +169,19 @@ for (let ref of buttons) {
         }
 
         if (!SWITCH && calcDisplay.textContent === "") {
-            display("The calculator is sleeping...")
-            setTimeout(display, 1000, "maybe try waking it up?")
-            setTimeout(display, 3000, "");
+            displayMessage("The calculator is sleeping...")
+            setTimeout(displayMessage, 1000, "maybe try waking it up?")
+            setTimeout(displayMessage, 3000, "");
         }
     })
 }
 
 function display(num) {
     calcDisplay.textContent = num;
+}
+
+function displayMessage(num) {
+    calcMessageDisplay.textContent = num;
 }
 
 //If any of the numbers are undefined
