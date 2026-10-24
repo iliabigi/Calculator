@@ -16,13 +16,24 @@ const operatorDisplay = document.querySelector("#operator");
 const num2Display = document.querySelector("#num2");
 const displayText = num1Display.textContent;
 const screen = document.querySelector("body");
+const bubbleSounds = ["./Assets/bubblePop2.mp3",
+                      "./Assets/bubblePop3.mp3",
+                      "./Assets/bubblePop4.mp3",
+                      "./Assets/bubblePop6.mp3"
+                    ];
+const bubbleAudio = bubbleSounds.map(val => {
+    const audio = new Audio(val);
+    audio.preload = "auto";
+    return audio;
+});     
+                    
+let audio = new Audio();
 
 let SWITCH = false;
 let decimalPoint = false;
 let decimalPower = 1;
 let result = 0
-console.log(SWITCH)
-
+// console.log(SWITCH)
 
 screen.addEventListener("keydown", e => {
     const findButton = buttons.find(val => val.dataset.key === e.key);
@@ -33,12 +44,33 @@ screen.addEventListener("keydown", e => {
 
     findButton.focus();
     findButton.click();
+    findButton.classList.add("press");
 })
 
+screen.addEventListener("keyup", e => {
+    const findButton = buttons.find(val => val.dataset.key === e.key);
+
+    if (e.key === "Enter") {
+        e.preventDefault();
+    }
+
+    findButton.classList.remove("press");
+})
 
 for (let ref of buttons) {
 
+    //Adding audio
     ref.addEventListener("click", e => {
+        let pick = Math.floor((Math.random() * bubbleAudio.length)) ;
+        audio = bubbleAudio[pick];
+
+        audio.currentTime = 0;
+        audio.play();
+    })
+
+    //Calulator behaviour
+    ref.addEventListener("click", e => {
+        
         if (e.target.textContent === "wake up") {
             result = 0;
             SWITCH = true;

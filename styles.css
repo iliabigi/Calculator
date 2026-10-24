@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Rubik";
-    src: url(./Fonts/Rubik-VariableFont_wght.ttf);
+    src: url(./Assets/Rubik-VariableFont_wght.ttf);
 }
 
 @font-face {
     font-family: "Rubik-Italic";
-    src: url(./Fonts/Rubik-Italic-VariableFont_wght.ttf);
+    src: url(./Assets/Rubik-Italic-VariableFont_wght.ttf);
 }
 
 body {
@@ -121,10 +121,27 @@ p {
 }
 
 button {
+    transition: transform 0.2s ease;
+    /* transition: color 0.5s ease; */
     border: none;
     background-color: #e5eaf5;
     border-radius: 30px;
     flex: 1;
     height: 60px;
     width: 100px;
+}
+
+button:active {
+    transform: scale(1.1);
+    background-color: #d0bdf4;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+button.press {
+    transform: scale(1.1);
+    background-color: #d0bdf4;
+    
 }
