@@ -152,6 +152,7 @@ for (let ref of buttons) {
                     setTimeout(display, 1000, calcVariables.num1);
                     calcVariables.num2 = undefined;
                     calcVariables.hasOperator = false
+                    operatorDisplay.textContent = displayText;
                     result = 0;
                 } else {
                     calcVariables.num1 = equals;

@@ -16,6 +16,7 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
+    background-color: #fff5d7
 }
 
 p {
@@ -27,6 +28,7 @@ p {
     display: flex;
     flex: 1;
     color: rgb(4, 4, 4);
+    
     justify-content: center;
     font-family: "Rubik";
     font-size: 20px;
@@ -56,21 +58,19 @@ p {
     justify-content: flex-end;
     flex-direction: column;
     border: 10px solid pink;
+    background-color: white;
     flex: 1;
 }
 
 .display-main {
     display: flex;
     margin-bottom: 40px;
-    /* border: 2px solid red */
 }
 
 .display-lower {
     display: flex;
     justify-content: space-between;
     background-color: rgba(187, 187, 187, 0.614);
-    /* border: 2px solid red; */
-
 }
 
 .calc-buttons {
