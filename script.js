@@ -102,8 +102,9 @@ for (let ref of buttons) {
                     //In case user divides by 0
                     else if (equals === Infinity) {
                         displayMessage("oi mate you can't do that... I'll ignore it just this once");
-                        setTimeout(displayMessage, 1000, calcVariables.num1);
+                        display(calcVariables.num1);
                         calcVariables.num2 = undefined;
+                        num2Display.textContent = displayText;
                         result = 0;
                     } else {
                         calcVariables.num1 = equals;
@@ -128,6 +129,7 @@ for (let ref of buttons) {
                 decimalPoint = false;
                 decimalPower = 1;
                 result = 0;
+                display("");
                 displayMessage("Cleaning everything.");
 
             } else if (e.target.textContent === "C") {
@@ -150,10 +152,11 @@ for (let ref of buttons) {
                 //In case user divides by 0
                 else if (equals === Infinity) {
                     displayMessage("oi mate you can't do that... I'll ignore it just this once");
-                    setTimeout(displayMessage, 1000, calcVariables.num1);
+                    display(calcVariables.num1);
                     calcVariables.num2 = undefined;
                     calcVariables.hasOperator = false
                     operatorDisplay.textContent = displayText;
+                    num2Display.textContent = displayText;
                     result = 0;
                 } else {
                     calcVariables.num1 = equals;
@@ -168,10 +171,8 @@ for (let ref of buttons) {
             // console.log(calcVariables);
         }
 
-        if (!SWITCH && calcDisplay.textContent === "") {
-            displayMessage("The calculator is sleeping...")
-            setTimeout(displayMessage, 1000, "maybe try waking it up?")
-            setTimeout(displayMessage, 3000, "");
+        if (!SWITCH && calcMessageDisplay.textContent === "") {
+            displayMessage("The calculator is sleeping... maybe try waking it up?")
         }
     })
 }
@@ -197,9 +198,10 @@ function undefinedHandler() {
 
     result = 0;
 
-    display("cmon man no operations on undefined stuff!");
-    setTimeout(display, 1000, "cleaning my data.");
-    setTimeout(display, 3000, "");
+    displayMessage("cmon man no operations on undefined stuff!");
+    display("");
+    setTimeout(displayMessage, 1000, "cleaning my data.");
+    setTimeout(displayMessage, 3000, "");
 } 
 
 function operate(number1, number2, operator) {
