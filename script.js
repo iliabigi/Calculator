@@ -25,7 +25,6 @@ console.log(SWITCH)
 
 
 screen.addEventListener("keydown", e => {
-    console.log(e.key);
     const findButton = buttons.find(val => val.dataset.key === e.key);
 
     if (e.key === "Enter") {
@@ -91,10 +90,12 @@ for (let ref of buttons) {
             } else if (operators.includes(e.target.textContent)) {
                 decimalPoint = false;
                 decimalPower = 1;
-                calcVariables.operator = e.target.textContent;
                 num1Display.textContent = calcVariables.num1;
-                operatorDisplay.textContent = calcVariables.operator
-
+                if (!calcVariables.hasOperator) {
+                    calcVariables.operator = e.target.textContent;
+                    operatorDisplay.textContent = calcVariables.operator;
+                }
+        
                 if (calcVariables.num2 !== undefined && calcVariables.hasOperator === true) {
                     let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
                     //In case there's an undefined in the numbers
@@ -109,10 +110,14 @@ for (let ref of buttons) {
                     } else {
                         calcVariables.num1 = equals;
                         num2Display.textContent = calcVariables.num2;
+                        operatorDisplay.textContent = calcVariables.operator;
+                        operatorDisplay.textContent = calcVariables.operator;
+
                         display(calcVariables.num1);
                     }
                 }  
 
+                calcVariables.operator = e.target.textContent;
                 calcVariables.hasOperator = true;
                 result = 0;
 
@@ -146,6 +151,7 @@ for (let ref of buttons) {
                 decimalPower = 1;
                 num1Display.textContent = calcVariables.num1;
                 num2Display.textContent = calcVariables.num2;
+                operatorDisplay.textContent = calcVariables.operator;
                 let equals = operate(calcVariables.num1, calcVariables.num2, calcVariables.operator);
                 //In case there's an undefined in the equation
                 if (equals === "undefined detected") undefinedHandler();
@@ -161,7 +167,6 @@ for (let ref of buttons) {
                 } else {
                     calcVariables.num1 = equals;
                     calcVariables.hasOperator = false
-
 
                     display(equals);
                     result = 0;
