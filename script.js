@@ -167,7 +167,9 @@ for (let ref of buttons) {
         }
 
         if (!SWITCH && calcDisplay.textContent === "") {
-            display("the calculator is sleeping... maybe try waking it up? ")
+            display("The calculator is sleeping...")
+            setTimeout(display, 1000, "maybe try waking it up?")
+            setTimeout(display, 3000, "");
         }
     })
 }
@@ -189,7 +191,7 @@ function undefinedHandler() {
 
     result = 0;
 
-    display("cmon man you can't do operations on undefined stuff!");
+    display("cmon man no operations on undefined stuff!");
     setTimeout(display, 1000, "cleaning my data.");
     setTimeout(display, 3000, "");
 } 

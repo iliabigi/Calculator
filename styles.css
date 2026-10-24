@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Rubik";
+    src: url(./Fonts/Rubik-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: "Rubik-Italic";
+    src: url(./Fonts/Rubik-Italic-VariableFont_wght.ttf);
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -16,13 +26,20 @@ p {
 #display {
     display: flex;
     flex: 1;
-    color: black;
+    color: rgb(4, 4, 4);
     justify-content: center;
+    font-family: "Rubik";
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .display-lower p {
-    color: gray;
-
+    color: rgb(43, 147, 146);
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: "Rubik-Italic"
 }
 
 .calc-body {
@@ -44,15 +61,16 @@ p {
 
 .display-main {
     display: flex;
-    margin-bottom: 40px
+    margin-bottom: 40px;
+    /* border: 2px solid red */
 }
 
 .display-lower {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    background-color: rgba(187, 187, 187, 0.614);
+    /* border: 2px solid red; */
+
 }
 
 .calc-buttons {
