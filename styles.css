@@ -16,7 +16,7 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
-    background-color: #fff5d7
+    background-color: #494D5F;
 }
 
 p {
@@ -26,34 +26,32 @@ p {
 
 #display {
     display: flex;
-    flex: 1;
-    /* color: rgb(4, 4, 4); */
-    color: white;
-    
+    flex: 1;    
     justify-content: center;
     align-items: center;
-    /* border: 2px solid red; */
+    margin-top: -20px;
     font-family: "Rubik";
     font-size: 20px;
     font-weight: 400;
 }
 
 #displayText {
-    /* color: rgb(43, 147, 146); */
-    color: white;
-    font-family: "Rubik";
+    font-family: "Rubik-Italic";
     font-size: 20px;
     font-weight: 400;
 }
 
 .display-lower p {
-    /* color: rgb(43, 147, 146); */
-    color: white;
-    font-weight: 500;
-    /* margin-bottom: 10px; */
+    font-weight: 500;    
     margin-left: 10px;
     margin-right: 10px;
     font-family: "Rubik-Italic"
+}
+
+#display,
+#displayText,
+.display-lower p {
+    color: white;
 }
 
 .calc-body {
@@ -61,51 +59,43 @@ p {
     flex-direction: column;
     justify-content: space-between;
     width: 452px;
-    height: 500px;
+    height: 550px;
     border: 2px solid black;
     border-radius: 20px;
 }
 
 .calc-display {
     display: flex;
+    flex: 1;
     justify-content: flex-end;
     flex-direction: column;
-    border: 10px solid pink;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    /* background-color: white; */
     background-color: black;
-    /* color: white; */
-    flex: 1;
 }
+
 
 .display-alt {
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
-    /* background-color: rgba(187, 187, 187, 0.614); */
-    /* border: 2px solid red; */
 }
 
 .display-main {
     display: flex;
     margin-bottom: 40px;
     justify-content: center;
-    /* align-items: center; */
+    border-top: 2px dotted black;
     flex: 1;
-    /* border: 2px solid blue; */
     margin: 0;
 }
 
 .display-lower {
     display: flex;
     justify-content: space-between;
-    flex: 1;
-    /* background-color: rgba(187, 187, 187, 0.614); */
     align-items: center;
-    /* border: 2px solid blue; */
-
+    border-top: 2px dotted black;
 }
 
 .calc-buttons {
@@ -113,10 +103,17 @@ p {
     flex-wrap: wrap-reverse;
     flex: 1;
     justify-content: space-between;
-    border: 10px solid yellow;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    background-color: #8458B3;
+    gap: 5px;
 }
+
+.calc-display,
+.calc-buttons {
+    border: 10px solid #8458B3;
+}
+
 
 .row {
     display: flex;
@@ -124,6 +121,9 @@ p {
 }
 
 button {
+    border: none;
+    background-color: #e5eaf5;
+    border-radius: 30px;
     flex: 1;
     height: 60px;
     width: 100px;
