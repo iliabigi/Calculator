@@ -51,6 +51,7 @@ p {
     width: 452px;
     height: 500px;
     border: 2px solid black;
+    border-radius: 20px;
 }
 
 .calc-display {
@@ -58,6 +59,8 @@ p {
     justify-content: flex-end;
     flex-direction: column;
     border: 10px solid pink;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     background-color: white;
     flex: 1;
 }
@@ -79,6 +82,8 @@ p {
     flex: 1;
     justify-content: space-between;
     border: 10px solid yellow;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .row {
