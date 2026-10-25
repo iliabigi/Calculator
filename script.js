@@ -29,7 +29,8 @@ const bubbleAudio = bubbleSounds.map(val => {
                     
 let audio = new Audio();
 
-let SWITCH = false;
+let SWITCH = true;
+displayMessage("hello... what can I do for ya?")
 let decimalPoint = false;
 let decimalPower = 1;
 let result = 0
